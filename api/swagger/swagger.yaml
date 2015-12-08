@@ -1,0 +1,83 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Location REST
+# during dev, should point to your local machine
+host: 127.0.0.1:10010
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  #- https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /country/byISO3166-1-alpha-2/{code}:
+    x-swagger-router-controller: location
+    get:
+      description: Query country by "ISO 3166-1 alpha 2" code
+      # used as the method name of the controller
+      operationId: country_by_ISO3166_1_alpha_2_code
+      parameters:
+        - name: code
+          in: path
+          description: https://en.wikipedia.org/wiki/ISO_3166-2
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/SuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /country/byISO3166-1-alpha-3/{code}:
+    x-swagger-router-controller: location
+    get:
+      description: Query country by "ISO 3166-1 alpha 3" code
+      # used as the method name of the controller
+      operationId: country_by_ISO3166_1_alpha_3_code
+      parameters:
+        - name: code
+          in: path
+          description: https://en.wikipedia.org/wiki/ISO_3166-3
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/SuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  SuccessResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
