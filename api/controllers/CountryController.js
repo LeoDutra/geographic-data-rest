@@ -26,7 +26,8 @@ var util = require('util');
  */
 module.exports = {
   country_by_ISO3166_1_alpha_2_code: country_by_ISO3166_1_alpha_2_code,
-  country_by_ISO3166_1_alpha_3_code: country_by_ISO3166_1_alpha_3_code
+  country_by_ISO3166_1_alpha_3_code: country_by_ISO3166_1_alpha_3_code,
+  listCountries: listCountries
 };
 
 /*
@@ -39,9 +40,9 @@ function country_by_ISO3166_1_alpha_2_code(req, res) {
   // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
   var ISO_3166_1_Alpha_2_code = req.swagger.params.code.value;
   
-  for (var i = 0, l = locations.length; i < l; i++) {
-  	if (locations[i].ISO_3166_1_Alpha_2_code === ISO_3166_1_Alpha_2_code) {
-  		return res.json(locations[i]);
+  for (var i = 0, l = countries.length; i < l; i++) {
+  	if (countries[i].ISO_3166_1_Alpha_2_code === ISO_3166_1_Alpha_2_code) {
+  		return res.json(countries[i]);
   	}
   }
 
@@ -53,9 +54,9 @@ function country_by_ISO3166_1_alpha_3_code(req, res) {
   // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
   var ISO_3166_1_Alpha_3_code = req.swagger.params.code.value;
   
-  for (var i = 0, l = locations.length; i < l; i++) {
-  	if (locations[i].ISO_3166_1_Alpha_3_code === ISO_3166_1_Alpha_3_code) {
-  		return res.json(locations[i]);
+  for (var i = 0, l = countries.length; i < l; i++) {
+  	if (countries[i].ISO_3166_1_Alpha_3_code === ISO_3166_1_Alpha_3_code) {
+  		return res.json(countries[i]);
   	}
   }
 
@@ -63,8 +64,14 @@ function country_by_ISO3166_1_alpha_3_code(req, res) {
   res.json(null);
 }
 
+function listCountries(req, res) {
+  // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
 
-var locations = [{
+  // this sends back a JSON response which is a single string
+  res.json(countries);
+}
+
+var countries = [{
     "englishShortName": "Afghanistan",
     "ISO_3166_1_Alpha_2_code": "AF",
     "ISO_3166_1_Alpha_3_code": "AFG",

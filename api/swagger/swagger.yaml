@@ -18,8 +18,25 @@ consumes:
 produces:
   - application/json
 paths:
+  /countries:
+    x-swagger-router-controller: CountryController
+    get:
+      description: List all countries and their data.
+      # used as the method name of the controller
+      operationId: listCountries
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/SuccessResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /country/byISO3166-1-alpha-2/{code}:
-    x-swagger-router-controller: location
+    x-swagger-router-controller: CountryController
     get:
       description: Query country by "ISO 3166-1 alpha 2" code
       # used as the method name of the controller
@@ -42,7 +59,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
   /country/byISO3166-1-alpha-3/{code}:
-    x-swagger-router-controller: location
+    x-swagger-router-controller: CountryController
     get:
       description: Query country by "ISO 3166-1 alpha 3" code
       # used as the method name of the controller
