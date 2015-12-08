@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   version: "0.0.1"
-  title: Location REST
+  title: Geographic Data REST
 # during dev, should point to your local machine
 host: 127.0.0.1:10010
 # basePath prefixes all resource paths 
